@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Campus Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f6fb;
+            color: #333;
+        }
+
+        /* Header */
+
+        header {
+            background: #173f7a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 8px;
+        }
+
+        /* Navigation */
+
+        nav {
+            background: #0d2d59;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            margin: 0 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            color: #61dafb;
+        }
+
+        /* Main */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        /* Dashboard */
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ddd;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            color: #173f7a;
+            margin-bottom: 10px;
+        }
+
+        /* Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .icon {
+            font-size: 45px;
+        }
+
+        .card h3 {
+            color: #173f7a;
+            margin: 10px;
+        }
+
+        .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #159957;
+        }
+
+        /* Sections */
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ddd;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #173f7a;
+            margin-bottom: 20px;
+        }
+
+        /* Forms */
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .btn {
+            background: #173f7a;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0d2d59;
+        }
+
+        /* Tables */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #173f7a;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Hide */
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #173f7a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 700px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            nav button {
+                margin: 6px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>🏫 Smart Campus Management System</h1>
+
+    <p>
+        Student • Faculty • Event Management
+    </p>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+    <button onclick="showPage('home')">
+        Home
+    </button>
+
+    <button onclick="showPage('student')">
+        Students
+    </button>
+
+    <button onclick="showPage('faculty')">
+        Faculty
+    </button>
+
+    <button onclick="showPage('event')">
+        Events
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+
+<!-- HOME -->
+
+<div id="home">
+
+    <div class="welcome">
+
+        <h2>
+            Welcome to Smart Campus 👋
+        </h2>
+
+        <p>
+            A simple system for managing students,
+            faculty members and campus events.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="icon">
+                👨‍🎓
+            </div>
+
+            <h3>
+                Students
+            </h3>
+
+            <div class="number"
+                 id="studentCount">
+                0
+            </div>
+
+            <p>
+                Registered Students
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                👩‍🏫
+            </div>
+
+            <h3>
+                Faculty
+            </h3>
+
+            <div class="number"
+                 id="facultyCount">
+                0
+            </div>
+
+            <p>
+                Faculty Members
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">
+                🎉
+            </div>
+
+            <h3>
+                Events
+            </h3>
+
+            <div class="number"
+                 id="eventCount">
+                0
+            </div>
+
+            <p>
+                Campus Events
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- STUDENT -->
+
+<div id="student"
+     class="hidden">
+
+
+    <div class="section">
+
+        <h2>
+            👨‍🎓 Student Management
+        </h2>
+
+
+        <form onsubmit="addStudent(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    Student ID
+                </label>
+
+                <input
+                    type="number"
+                    id="studentId"
+                    placeholder="Enter Student ID"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter Student Name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Branch
+                </label>
+
+                <input
+                    type="text"
+                    id="branch"
+                    placeholder="Enter Branch"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Year
+                </label>
+
+                <input
+                    type="number"
+                    id="studentYear"
+                    placeholder="Enter Year"
+                    required>
+
+            </div>
+
+
+            <button class="btn">
+                Add Student
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>
+            📋 Student Details
+        </h2>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Year</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody id="studentTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+<!-- FACULTY -->
+
+<div id="faculty"
+     class="hidden">
+
+
+    <div class="section">
+
+        <h2>
+            👩‍🏫 Faculty Management
+        </h2>
+
+
+        <form onsubmit="addFaculty(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    Faculty ID
+                </label>
+
+                <input
+                    type="number"
+                    id="facultyId"
+                    placeholder="Enter Faculty ID"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Faculty Name
+                </label>
+
+                <input
+                    type="text"
+                    id="facultyName"
+                    placeholder="Enter Faculty Name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Department
+                </label>
+
+                <input
+                    type="text"
+                    id="department"
+                    placeholder="Enter Department"
+                    required>
+
+            </div>
+
+
+            <button class="btn">
+                Add Faculty
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>
+            📋 Faculty Details
+        </h2>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody id="facultyTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+<!-- EVENT -->
+
+<div id="event"
+     class="hidden">
+
+
+    <div class="section">
+
+        <h2>
+            🎉 Event Management
+        </h2>
+
+
+        <form onsubmit="addEvent(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    Event ID
+                </label>
+
+                <input
+                    type="number"
+                    id="eventId"
+                    placeholder="Enter Event ID"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Event Name
+                </label>
+
+                <input
+                    type="text"
+                    id="eventName"
+                    placeholder="Enter Event Name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Event Date
+                </label>
+
+                <input
+                    type="date"
+                    id="eventDate"
+                    required>
+
+            </div>
+
+
+            <button class="btn">
+                Add Event
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>
+            📅 Event Details
+        </h2>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Event ID</th>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody id="eventTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        Smart Campus Management System
+    </p>
+
+    <p>
+        B.Tech 2nd Year Java Project
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* ARRAYS */
+
+let students = [];
+
+let faculty = [];
+
+let events = [];
+
+
+/* PAGE DISPLAY */
+
+function showPage(page) {
+
+    document
+        .getElementById("home")
+        .classList.add("hidden");
+
+    document
+        .getElementById("student")
+        .classList.add("hidden");
+
+    document
+        .getElementById("faculty")
+        .classList.add("hidden");
+
+    document
+        .getElementById("event")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(page)
+        .classList.remove("hidden");
+
+}
+
+
+/* ADD STUDENT */
+
+function addStudent(e) {
+
+    e.preventDefault();
+
+
+    let id =
+        document.getElementById("studentId").value;
+
+    let name =
+        document.getElementById("studentName").value;
+
+    let branch =
+        document.getElementById("branch").value;
+
+    let year =
+        document.getElementById("studentYear").value;
+
+
+    students.push({
+        id: id,
+        name: name,
+        branch: branch,
+        year: year
+    });
+
+
+    displayStudents();
+
+
+    document.getElementById("studentCount")
+        .innerText = students.length;
+
+
+    document
+        .querySelector("#student form")
+        .reset();
+
+
+    alert("Student added successfully!");
+
+}
+
+
+/* DISPLAY STUDENTS */
+
+function displayStudents() {
+
+    let table =
+        document.getElementById("studentTable");
+
+
+    table.innerHTML = "";
+
+
+    students.forEach(function(s) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${s.id}</td>
+
+                <td>${s.name}</td>
+
+                <td>${s.branch}</td>
+
+                <td>${s.year}</td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ADD FACULTY */
+
+function addFaculty(e) {
+
+    e.preventDefault();
+
+
+    let id =
+        document.getElementById("facultyId").value;
+
+    let name =
+        document.getElementById("facultyName").value;
+
+    let department =
+        document.getElementById("department").value;
+
+
+    faculty.push({
+
+        id: id,
+
+        name: name,
+
+        department: department
+
+    });
+
+
+    displayFaculty();
+
+
+    document.getElementById("facultyCount")
+        .innerText = faculty.length;
+
+
+    document
+        .querySelector("#faculty form")
+        .reset();
+
+
+    alert("Faculty added successfully!");
+
+}
+
+
+/* DISPLAY FACULTY */
+
+function displayFaculty() {
+
+    let table =
+        document.getElementById("facultyTable");
+
+
+    table.innerHTML = "";
+
+
+    faculty.forEach(function(f) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${f.id}</td>
+
+                <td>${f.name}</td>
+
+                <td>${f.department}</td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ADD EVENT */
+
+function addEvent(e) {
+
+    e.preventDefault();
+
+
+    let id =
+        document.getElementById("eventId").value;
+
+    let name =
+        document.getElementById("eventName").value;
+
+    let date =
+        document.getElementById("eventDate").value;
+
+
+    events.push({
+
+        id: id,
+
+        name: name,
+
+        date: date
+
+    });
+
+
+    displayEvents();
+
+
+    document.getElementById("eventCount")
+        .innerText = events.length;
+
+
+    document
+        .querySelector("#event form")
+        .reset();
+
+
+    alert("Event added successfully!");
+
+}
+
+
+/* DISPLAY EVENTS */
+
+function displayEvents() {
+
+    let table =
+        document.getElementById("eventTable");
+
+
+    table.innerHTML = "";
+
+
+    events.forEach(function(e) {
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${e.id}</td>
+
+                <td>${e.name}</td>
+
+                <td>${e.date}</td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
